@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#000F17] text-white antialiased;
+    /* Fundo geral da aplicação */
+  }
+}
+
+@layer components {
+
+  /* Container Principal do Layout */
+  .layout-container {
+    @apply flex min-h-screen w-full relative overflow-hidden;
+    max-width: 1440px;
+    /* Largura máxima para telas grandes */
+    margin: 0 auto;
+    /* Centralizar em telas muito largas */
+  }
+
+  /* Barra Lateral (Sidebar) */
+  .sidebar-container {
+    @apply fixed left-0 top-0 h-full bg-[#001E2E] flex flex-col z-30 transition-all duration-300;
+    width: 260px;
+    border-right: 1px solid #1E2D3D;
+  }
+
+  /* Cabeçalho (Header) */
+  .header-container {
+    @apply sticky top-0 z-20 flex items-center justify-between bg-[#001E2E] w-full transition-all duration-300;
+    height: 70px;
+    padding: 16px 26px;
+    margin-left: 260px;
+    /* Compensar a sidebar fixa */
+    width: calc(100% - 260px);
+    /* Largura fluida */
+  }
+
+  /* Responsividade para Mobile */
+  @media (max-width: 768px) {
+    .sidebar-container {
+      transform: translateX(-100%);
+      /* Esconder sidebar no mobile */
+    }
+
+    .sidebar-container.open {
+      transform: translateX(0);
+    }
+
+    .header-container {
+      margin-left: 0;
+      width: 100%;
+    }
+
+    .main-content {
+      margin-left: 0 !important;
+    }
+  }
+
+  /* Área de Conteúdo Principal */
+  .main-content {
+    @apply flex-1 flex flex-col relative transition-all duration-300;
+    margin-left: 260px;
+  }
+
+  /* Controles da Lista (Filtros e Busca) */
+  .list-controls-container {
+    @apply flex flex-col md:flex-row justify-between items-center w-full bg-[#001E2E] md:bg-transparent;
+    min-height: 80px;
+    padding: 16px 36px;
+    border-bottom: 1px dashed #1E2D3D;
+    /* Borda tracejada específica */
+  }
+
+  /* Botão Novo */
+  .btn-novo {
+    @apply bg-[#0ea5e9] hover:bg-sky-600 text-white font-bold text-sm uppercase flex items-center justify-center transition-colors;
+    width: 149px;
+    height: 40px;
+    border-radius: 8px;
+    gap: 10px;
+    padding: 10px;
+  }
+
+  /* Card do Mapa */
+  .map-card {
+    @apply relative overflow-hidden bg-[#001622] mt-5 mx-6;
+    border: 1px solid #002D44;
+    border-radius: 20px;
+    height: 589px;
+    /* Altura fixa ou min-height */
+    width: auto;
+    /* Largura automática para responsividade */
+  }
+
+  /* Container da Tabela */
+  .table-card {
+    @apply mt-6 mx-6 overflow-hidden bg-[#001622];
+    border: 1px solid #002D44;
+    border-radius: 8px 8px 0 0;
+  }
+
+  .table-header-row {
+    height: 55px;
+    border-bottom: 1px solid #002D44;
+  }
+
+  .table-header-cell {
+    @apply px-6 text-xs font-bold text-white uppercase tracking-wider text-center;
+    border-right: 1px solid #002D44;
+  }
+}
+
+/* Customização da barra de rolagem para tema escuro */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
