@@ -1,0 +1,118 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]:
+      - heading "ROTA 361°" [level=1] [ref=e6]
+      - button [ref=e7] [cursor=pointer]:
+        - img [ref=e8]
+    - navigation [ref=e11]:
+      - link "Dashboard" [ref=e12] [cursor=pointer]:
+        - /url: /
+        - img [ref=e13]
+        - text: Dashboard
+      - link "Alertas" [ref=e21] [cursor=pointer]:
+        - /url: /alerts
+        - img [ref=e22]
+        - text: Alertas
+      - link "Viagens" [ref=e24] [cursor=pointer]:
+        - /url: /trips
+        - img [ref=e25]
+        - text: Viagens
+      - link "Veículos" [ref=e32] [cursor=pointer]:
+        - /url: /vehicles
+        - img [ref=e33]
+        - text: Veículos
+      - link "Motoristas" [ref=e35] [cursor=pointer]:
+        - /url: /drivers
+        - img [ref=e36]
+        - text: Motoristas
+      - link "Rota" [ref=e39] [cursor=pointer]:
+        - /url: /routes
+        - img [ref=e40]
+        - text: Rota
+      - link "Lugares" [ref=e43] [cursor=pointer]:
+        - /url: /places
+        - img [ref=e44]
+        - text: Lugares
+      - link "Configurações" [ref=e47] [cursor=pointer]:
+        - /url: /settings
+        - img [ref=e48]
+        - text: Configurações
+      - link "CheckList" [ref=e51] [cursor=pointer]:
+        - /url: /checklist
+        - img [ref=e52]
+        - text: CheckList
+      - link "Relatórios" [ref=e55] [cursor=pointer]:
+        - /url: /reports
+        - img [ref=e56]
+        - text: Relatórios
+      - link "Perfis" [ref=e59] [cursor=pointer]:
+        - /url: /profiles
+        - img [ref=e60]
+        - text: Perfis
+      - link "Usuarios" [ref=e62] [cursor=pointer]:
+        - /url: /users
+        - img [ref=e63]
+        - text: Usuarios
+  - generic [ref=e65]:
+    - banner [ref=e66]:
+      - heading "Veículos" [level=2] [ref=e67]
+      - generic [ref=e68]:
+        - button [ref=e69] [cursor=pointer]:
+          - img [ref=e70]
+        - button [ref=e73] [cursor=pointer]:
+          - img [ref=e74]
+        - img "User" [ref=e79]
+    - main [ref=e80]:
+      - generic [ref=e81]:
+        - generic [ref=e82]:
+          - generic [ref=e83]:
+            - heading "Lista" [level=2] [ref=e84]
+            - generic [ref=e85]:
+              - generic [ref=e89] [cursor=pointer]: Rastreados
+              - generic [ref=e92] [cursor=pointer]: Outros
+          - generic [ref=e93]:
+            - textbox "Buscar por placa ou frota" [ref=e95]: ABC1234
+            - button "Novo" [ref=e96] [cursor=pointer]
+        - generic [ref=e98]:
+          - button [ref=e99] [cursor=pointer]:
+            - img [ref=e100]
+          - heading "Novo Veículo" [level=2] [ref=e103]
+          - generic [ref=e104]:
+            - generic [ref=e105]:
+              - generic [ref=e106]: Placa
+              - 'textbox "Ex: ABC1234" [active] [ref=e107]'
+              - text: A placa deve ter pelo menos 7 caracteres
+            - generic [ref=e108]:
+              - generic [ref=e109]: Frota
+              - 'textbox "Ex: 000001" [ref=e110]'
+              - text: O número da frota é obrigatório
+            - generic [ref=e111]:
+              - generic [ref=e112]: Modelo
+              - 'textbox "Ex: FH 460" [ref=e113]'
+              - text: O modelo é obrigatório
+            - generic [ref=e114]:
+              - generic [ref=e115]: Tipo
+              - combobox [ref=e116]:
+                - option "Selecione..." [selected]
+                - option "Motor"
+                - option "Implemento"
+              - text: Selecione um tipo válido
+            - generic [ref=e117]:
+              - button "Cancelar" [ref=e118] [cursor=pointer]
+              - button "Salvar" [ref=e119] [cursor=pointer]
+        - heading "Mapa rastreador" [level=3] [ref=e121]
+        - table [ref=e129]:
+          - rowgroup [ref=e130]:
+            - row "Placa Frota Tipo Modelo Status" [ref=e131]:
+              - columnheader "Placa" [ref=e132]
+              - columnheader "Frota" [ref=e133]
+              - columnheader "Tipo" [ref=e134]
+              - columnheader "Modelo" [ref=e135]
+              - columnheader "Status" [ref=e136]
+          - rowgroup [ref=e137]:
+            - row "Nenhum veículo encontrado." [ref=e138]:
+              - cell "Nenhum veículo encontrado." [ref=e139]
+```

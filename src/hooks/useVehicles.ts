@@ -20,12 +20,12 @@ export function useVehicles(params: UseVehiclesParams) {
 
             // Map to internal structure
             return {
-                data: data.content.items,
+                data: data.content.vehicles,
                 meta: {
-                    total: data.content.total,
+                    total: data.content.total || (data.content.totalPages * (Number(data.content.perPage) || 10)),
                     page: data.content.page,
                     lastPage: data.content.totalPages,
-                    perPage: data.content.limit
+                    perPage: Number(data.content.perPage) || 10
                 }
             } as PaginatedResponse<Vehicle>;
         },
@@ -63,12 +63,12 @@ export function useInfiniteVehicles(params: Omit<UseVehiclesParams, 'page'>) {
                 params: { ...params, page: pageParam },
             });
             return {
-                data: data.content.items,
+                data: data.content.vehicles,
                 meta: {
-                    total: data.content.total,
+                    total: data.content.total || (data.content.totalPages * (Number(data.content.perPage) || 10)),
                     page: data.content.page,
                     lastPage: data.content.totalPages,
-                    perPage: data.content.limit
+                    perPage: Number(data.content.perPage) || 10
                 }
             } as PaginatedResponse<Vehicle>;
         },

@@ -15,7 +15,7 @@ export function VehiclesPage() {
         page,
         perPage: 10,
         type: filterType === "tracked" ? "tracked" : "notTracked",
-        filter: search
+        filter: search || undefined
     });
 
     const { data: locationsData } = useVehicleLocations();
@@ -37,7 +37,10 @@ export function VehiclesPage() {
                                 type="radio"
                                 name="filterType"
                                 checked={filterType === 'tracked'}
-                                onChange={() => setFilterType('tracked')}
+                                onChange={() => {
+                                    setFilterType('tracked');
+                                    setPage(1);
+                                }}
                                 className="hidden"
                             />
                             <span className={`${filterType === 'tracked' ? 'text-white' : 'text-gray-400 group-hover:text-gray-300'} font-medium`}>Rastreados</span>
@@ -51,7 +54,10 @@ export function VehiclesPage() {
                                 type="radio"
                                 name="filterType"
                                 checked={filterType === 'other'}
-                                onChange={() => setFilterType('other')}
+                                onChange={() => {
+                                    setFilterType('other');
+                                    setPage(1);
+                                }}
                                 className="hidden"
                             />
                             <span className={`${filterType === 'other' ? 'text-white' : 'text-gray-400 group-hover:text-gray-300'} font-medium`}>Outros</span>
@@ -65,7 +71,10 @@ export function VehiclesPage() {
                             type="text"
                             placeholder="Buscar por placa ou frota"
                             value={search}
-                            onChange={(e) => setSearch(e.target.value)}
+                            onChange={(e) => {
+                                setSearch(e.target.value);
+                                setPage(1);
+                            }}
                             className="w-full bg-[#02121c] border border-gray-700 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-1 focus:ring-accent placeholder:text-gray-500 text-sm"
                         />
                     </div>
@@ -83,9 +92,9 @@ export function VehiclesPage() {
 
             {/* Seção do Mapa */}
             {filterType === "tracked" && (
-                <div className="map-card p-6 space-y-4">
-                    <h3 className="text-white font-bold pl-1">Mapa rastreador</h3>
-                    <div className="w-full h-[calc(100%-40px)] rounded-lg overflow-hidden">
+                <div className="map-card p-6 flex flex-col">
+                    <h3 className="text-white font-bold pl-1 mb-4">Mapa rastreador</h3>
+                    <div className="flex-1 rounded-lg overflow-hidden">
                         <VehicleMap locations={locationsData || []} />
                     </div>
                 </div>
@@ -96,6 +105,9 @@ export function VehiclesPage() {
                 <VehicleTable
                     data={vehiclesData?.data || []}
                     isLoading={isLoadingVehicles}
+                    currentPage={page}
+                    totalPages={vehiclesData?.meta.lastPage || 0}
+                    onPageChange={(newPage) => setPage(newPage)}
                 />
             </div>
 

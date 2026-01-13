@@ -1,7 +1,7 @@
 export interface Vehicle {
     id: string;
     plate: string;
-    fleetNumber?: string;
+    fleet?: string;
     type: 'motor' | 'implement' | 'vehicle';
     model: string;
     status: string;
@@ -10,11 +10,12 @@ export interface Vehicle {
 export interface VehicleLocation {
     id: string;
     plate: string;
-    latitude: number;
-    longitude: number;
+    lat: number;
+    lng: number;
     direction?: number;
     speed?: number;
     updatedAt?: string;
+    createdAt?: string;
 }
 
 // Internal app usage (mapped from API)
@@ -36,9 +37,9 @@ export interface ApiResponse<T> {
 }
 
 export interface ApiPaginatedContent<T> {
-    items: T[];
-    total: number;
+    vehicles: T[];
+    total?: number;
     page: number;
-    limit: number;
+    perPage: string | number;
     totalPages: number;
 }
