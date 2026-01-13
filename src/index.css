@@ -69,11 +69,18 @@
 
   /* Controles da Lista (Filtros e Busca) */
   .list-controls-container {
-    @apply flex flex-col md:flex-row justify-between items-center w-full bg-[#001E2E] md:bg-transparent;
+    @apply flex flex-col xl:flex-row justify-between items-center w-full bg-[#001E2E] xl:bg-transparent gap-4;
     min-height: 80px;
-    padding: 16px 36px;
+    padding: 16px 24px;
     border-bottom: 1px dashed #1E2D3D;
     /* Borda tracejada específica */
+  }
+
+  /* Responsividade adicional para telas médias */
+  @media (min-width: 1024px) {
+    .list-controls-container {
+      padding: 16px 36px;
+    }
   }
 
   /* Botão Novo */
