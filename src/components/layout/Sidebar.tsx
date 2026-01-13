@@ -1,14 +1,9 @@
 import {
-    Bell,
-    Map as MapIcon,
-    Truck,
     User,
-    Navigation,
     MapPin,
     Settings,
     ClipboardList,
     FileBarChart,
-    Users,
     ShieldCheck,
     PanelLeftClose
 } from "lucide-react";
@@ -33,19 +28,132 @@ const DashboardIcon = ({ size = 19, className }: { size?: number | string, class
     </svg>
 );
 
+const AlertIcon = ({
+    size = 19,
+    className,
+}: {
+    size?: number | string;
+    className?: string;
+}) => (
+    <svg
+        width={size}
+        height={size}
+        viewBox="0 0 18 22"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={className}
+    >
+        <path
+            d="M7.01 19.51C7.01 20.61 7.9 21.5 9 21.5C10.1 21.5 10.99 20.61 10.99 19.51H7.01ZM9 4.5C11.76 4.5 14 6.74 14 9.5V16.5H4V9.5C4 6.74 6.24 4.5 9 4.5ZM9 0C8.17 0 7.5 0.67 7.5 1.5V2.67C4.36 3.35 2 6.15 2 9.5V15.5L0 17.5V18.5H18V17.5L16 15.5V9.5C16 6.15 13.64 3.35 10.5 2.67V1.5C10.5 0.67 9.83 0 9 0ZM8 6.5H10V10.5H8V6.5ZM8 12.5H10V14.5H8V12.5Z"
+            fill="currentColor"
+        />
+    </svg>
+);
+
+const ViagensIcon = ({
+    size = 19,
+    className,
+}: {
+    size?: number | string;
+    className?: string;
+}) => (
+    <svg
+        width={size}
+        height={size}
+        viewBox="0 0 19 19"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={className}
+    >
+        <path d="M16 14V11H14V14H11V16H14V19H16V16H19V14H16Z" fill="currentColor" />
+        <path d="M16 0H14V9H16V0Z" fill="currentColor" />
+        <path d="M2 0H0V16H2V0Z" fill="currentColor" />
+        <path d="M9 0H7V4H9V0Z" fill="currentColor" />
+        <path d="M9 6H7V10H9V6Z" fill="currentColor" />
+        <path d="M9 12H7V16H9V12Z" fill="currentColor" />
+    </svg>
+);
+
+const VeiculosIcon = ({
+    size = 19,
+    className,
+}: {
+    size?: number | string;
+    className?: string;
+}) => (
+    <svg
+        width={size}
+        height={size}
+        viewBox="0 0 22 16"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={className}
+    >
+        <path d="M19 4H16V0H2C0.9 0 0 0.9 0 2V13H2C2 14.66 3.34 16 5 16C6.66 16 8 14.66 8 13H14C14 14.66 15.34 16 17 16C18.66 16 20 14.66 20 13H22V8L19 4ZM18.5 5.5L20.46 8H16V5.5H18.5ZM5 14C4.45 14 4 13.55 4 13C4 12.45 4.45 12 5 12C5.55 12 6 12.45 6 13C6 13.55 5.55 14 5 14ZM7.22 11C6.67 10.39 5.89 10 5 10C4.11 10 3.33 10.39 2.78 11H2V2H14V11H7.22ZM17 14C16.45 14 16 13.55 16 13C16 12.45 16.45 12 17 12C17.55 12 18 12.45 18 13C18 13.55 17.55 14 17 14Z" fill="currentColor" />
+    </svg>
+);
+
+const RotasIcon = ({
+    size = 19,
+    className,
+}: {
+    size?: number | string;
+    className?: string;
+}) => (
+    <svg
+        width={size}
+        height={size}
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={className}
+    >
+        <g clipPath="url(#clip0_7583_10304)">
+            <path d="M18 4L14 8H17V15C17 16.1 16.1 17 15 17C13.9 17 13 16.1 13 15V8C13 5.79 11.21 4 9 4C6.79 4 5 5.79 5 8V15H2L6 19L10 15H7V8C7 6.9 7.9 6 9 6C10.1 6 11 6.9 11 8V15C11 17.21 12.79 19 15 19C17.21 19 19 17.21 19 15V8H22L18 4Z" fill="currentColor" />
+        </g>
+        <defs>
+            <clipPath id="clip0_7583_10304">
+                <rect width="24" height="24" fill="white" />
+            </clipPath>
+        </defs>
+    </svg>
+);
+
+const UsuariosIcon = ({
+    size = 19,
+    className,
+}: {
+    size?: number | string;
+    className?: string;
+}) => (
+    <svg
+        width={size}
+        height={size}
+        viewBox="0 0 19 14"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={className}
+    >
+        <path
+            d="M6.5625 6.75C8.37187 6.75 9.84375 5.23607 9.84375 3.375C9.84375 1.51393 8.37187 0 6.5625 0C4.75313 0 3.28125 1.51393 3.28125 3.375C3.28125 5.23607 4.75313 6.75 6.5625 6.75ZM6.5625 1.92857C7.34062 1.92857 7.96875 2.57464 7.96875 3.375C7.96875 4.17536 7.34062 4.82143 6.5625 4.82143C5.78438 4.82143 5.15625 4.17536 5.15625 3.375C5.15625 2.57464 5.78438 1.92857 6.5625 1.92857ZM6.60938 11.5714H2.59687C3.525 11.0893 5.12813 10.6071 6.5625 10.6071C6.66563 10.6071 6.77813 10.6168 6.88125 10.6168C7.2 9.91286 7.75312 9.33429 8.41875 8.87143C7.73437 8.74607 7.0875 8.67857 6.5625 8.67857C4.36875 8.67857 0 9.80679 0 12.0536V13.5H6.5625V12.0536C6.5625 11.8896 6.58125 11.7257 6.60938 11.5714ZM13.5938 9.16071C11.8687 9.16071 8.4375 10.1346 8.4375 12.0536V13.5H18.75V12.0536C18.75 10.1346 15.3188 9.16071 13.5938 9.16071ZM14.7281 7.40571C15.4406 6.99107 15.9375 6.21 15.9375 5.30357C15.9375 3.97286 14.8875 2.89286 13.5938 2.89286C12.3 2.89286 11.25 3.97286 11.25 5.30357C11.25 6.21 11.7469 6.99107 12.4594 7.40571C12.7969 7.59857 13.1812 7.71429 13.5938 7.71429C14.0063 7.71429 14.3906 7.59857 14.7281 7.40571Z"
+            fill="currentColor"
+        />
+    </svg>
+);
+
 const NAV_ITEMS = [
     { label: "Dashboard", icon: DashboardIcon, href: "/" },
-    { label: "Alertas", icon: Bell, href: "/alerts" },
-    { label: "Viagens", icon: Navigation, href: "/trips" },
-    { label: "Veículos", icon: Truck, href: "/vehicles" },
+    { label: "Alertas", icon: AlertIcon, href: "/alerts" },
+    { label: "Viagens", icon: ViagensIcon, href: "/trips" },
+    { label: "Veículos", icon: VeiculosIcon, href: "/vehicles" },
     { label: "Motoristas", icon: User, href: "/drivers" },
-    { label: "Rota", icon: MapIcon, href: "/routes" },
+    { label: "Rota", icon: RotasIcon, href: "/routes" },
     { label: "Lugares", icon: MapPin, href: "/places" },
     { label: "Configurações", icon: Settings, href: "/settings" },
     { label: "CheckList", icon: ClipboardList, href: "/checklist" },
     { label: "Relatórios", icon: FileBarChart, href: "/reports" },
     { label: "Perfis", icon: ShieldCheck, href: "/profiles" },
-    { label: "Usuarios", icon: Users, href: "/users" },
+    { label: "Usuarios", icon: UsuariosIcon, href: "/users" },
 ];
 
 export function Sidebar() {
