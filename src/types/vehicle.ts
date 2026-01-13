@@ -19,7 +19,6 @@ export interface VehicleLocation {
     fleet?: string;
 }
 
-// Internal app usage (mapped from API)
 export interface PaginatedResponse<T> {
     data: T[];
     meta: {
@@ -30,7 +29,6 @@ export interface PaginatedResponse<T> {
     };
 }
 
-// Actual API response structure
 export interface ApiResponse<T> {
     statusCode: number;
     message: string;

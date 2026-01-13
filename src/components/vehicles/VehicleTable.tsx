@@ -1,5 +1,4 @@
 import type { Vehicle } from "../../types/vehicle";
-import { cn } from "../../lib/utils";
 
 interface VehicleTableProps {
     data: Vehicle[];
@@ -20,7 +19,6 @@ export function VehicleTable({
         return <div className="p-8 text-center text-gray-400">Carregando veículos...</div>;
     }
 
-    // Função para renderizar os números das páginas com lógica de reticências
     const renderPageNumbers = () => {
         const pages = [];
         for (let i = 1; i <= totalPages; i++) {
@@ -29,16 +27,18 @@ export function VehicleTable({
                 i === totalPages ||
                 (i >= currentPage - 1 && i <= currentPage + 1)
             ) {
+                let classes = "w-8 h-8 flex items-center justify-center rounded transition-colors text-sm ";
+                if (currentPage === i) {
+                    classes += "bg-accent text-white";
+                } else {
+                    classes += "text-gray-400 hover:bg-gray-800 hover:text-white";
+                }
+
                 pages.push(
                     <button
                         key={i}
                         onClick={() => onPageChange(i)}
-                        className={cn(
-                            "w-8 h-8 flex items-center justify-center rounded transition-colors text-sm",
-                            currentPage === i
-                                ? "bg-accent text-white"
-                                : "text-gray-400 hover:bg-gray-800 hover:text-white"
-                        )}
+                        className={classes}
                     >
                         {i}
                     </button>
@@ -50,9 +50,16 @@ export function VehicleTable({
         return pages;
     };
 
+    function formatStatus(status: string) {
+        const s = status.toLowerCase();
+        if (s === 'active' || s.includes("viagem")) return 'Em viagem';
+        if (s === 'maintenance' || s.includes("manutenção")) return 'Em manutenção';
+        if (s === 'available' || s.includes("disponível")) return 'Disponível';
+        return status;
+    }
+
     return (
         <div className="table-card">
-            {/* Área de rolagem para os dados da tabela */}
             <div className="flex-1 overflow-auto">
                 <table className="w-full border-collapse">
                     <thead className="sticky top-0 bg-[#001622] z-10">
@@ -86,7 +93,6 @@ export function VehicleTable({
                 </table>
             </div>
 
-            {/* Controles de Paginação - Sempre visíveis no final do card */}
             {totalPages > 0 && (
                 <div className="pagination-container">
                     <button
@@ -112,13 +118,4 @@ export function VehicleTable({
             )}
         </div>
     );
-}
-
-// Formata o status para o padrão brasileiro
-function formatStatus(status: string) {
-    const s = status.toLowerCase();
-    if (s === 'active' || s.includes("viagem")) return 'Em viagem';
-    if (s === 'maintenance' || s.includes("manutenção")) return 'Em manutenção';
-    if (s === 'available' || s.includes("disponível")) return 'Disponível';
-    return status;
 }

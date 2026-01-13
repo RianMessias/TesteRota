@@ -3,8 +3,14 @@ import { VehicleTable } from './VehicleTable';
 import type { Vehicle } from '../../types/vehicle';
 
 describe('VehicleTable', () => {
+    const defaultProps = {
+        currentPage: 1,
+        totalPages: 10,
+        onPageChange: () => { },
+    };
+
     it('renders loading state', () => {
-        render(<VehicleTable data={[]} isLoading={true} />);
+        render(<VehicleTable data={[]} isLoading={true} {...defaultProps} />);
         expect(screen.getByText(/Carregando veículos/i)).toBeInTheDocument();
     });
 
@@ -13,20 +19,20 @@ describe('VehicleTable', () => {
             {
                 id: '1',
                 plate: 'ABC-1234',
-                fleetNumber: '100',
+                fleet: '100',
                 type: 'motor',
                 model: 'FH 460',
                 status: 'active'
             }
         ];
 
-        render(<VehicleTable data={mockData} isLoading={false} />);
+        render(<VehicleTable data={mockData} isLoading={false} {...defaultProps} />);
         expect(screen.getByText('ABC-1234')).toBeInTheDocument();
         expect(screen.getByText('100')).toBeInTheDocument();
     });
 
     it('renders empty state', () => {
-        render(<VehicleTable data={[]} isLoading={false} />);
+        render(<VehicleTable data={[]} isLoading={false} {...defaultProps} />);
         expect(screen.getByText(/Nenhum veículo encontrado/i)).toBeInTheDocument();
     });
 });

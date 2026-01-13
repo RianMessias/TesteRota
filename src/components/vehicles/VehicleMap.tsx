@@ -2,19 +2,16 @@ import { GoogleMap, useJsApiLoader, Marker, OverlayView } from '@react-google-ma
 import { useState, useCallback } from 'react';
 import type { VehicleLocation } from "../../types/vehicle";
 
-// Estilos básicos do container do mapa
 const containerStyle = {
     width: '100%',
     height: '100%'
 };
 
-// Ponto central inicial (São Paulo)
 const center = {
     lat: -23.550520,
     lng: -46.633308
 };
 
-// Estilos detalhados para o mapa (Água ciano, parques menta, estradas limpas)
 const mapOptions = {
     styles: [
         { "featureType": "water", "elementType": "geometry", "stylers": [{ "color": "#a8ebff" }] },
@@ -40,13 +37,11 @@ interface VehicleMapProps {
 export function VehicleMap({ locations }: VehicleMapProps) {
     const [selectedVehicle, setSelectedVehicle] = useState<VehicleLocation | null>(null);
 
-    // Carregamento da API do Google Maps
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
         googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY || ""
     });
 
-    // Função para ajustar os limites do mapa quando os veículos carregam
     const onLoad = useCallback(function callback(map: google.maps.Map) {
         const bounds = new window.google.maps.LatLngBounds();
         if (locations.length > 0) {
@@ -74,7 +69,6 @@ export function VehicleMap({ locations }: VehicleMapProps) {
                 onLoad={onLoad}
                 options={mapOptions}
             >
-                {/* Renderização dos Marcadores de Veículos */}
                 {locations.filter(loc => loc && !isNaN(loc.lat) && !isNaN(loc.lng)).map((loc, index) => {
                     const colors = ['#0ea5e9', '#22c55e', '#f97316', '#eab308'];
                     const color = colors[index % colors.length];
@@ -85,7 +79,6 @@ export function VehicleMap({ locations }: VehicleMapProps) {
                             position={{ lat: loc.lat, lng: loc.lng }}
                             onClick={() => setSelectedVehicle(loc)}
                             icon={{
-                                // Marcador customizado em formato de gota com ícone de caminhão
                                 url: `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(`
                                     <svg width="40" height="50" viewBox="0 0 40 50" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M20 0C8.95 0 0 8.95 0 20C0 35 20 50 20 50C20 50 40 35 40 20C40 8.95 31.05 0 20 0Z" fill="${color}" stroke="white" stroke-width="2"/>
@@ -100,16 +93,13 @@ export function VehicleMap({ locations }: VehicleMapProps) {
                     );
                 })}
 
-                {/* Janela de Informações Customizada (OverlayView) */}
                 {selectedVehicle && (
                     <OverlayView
                         position={{ lat: selectedVehicle.lat, lng: selectedVehicle.lng }}
                         mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
                     >
-                        {/* Box de Informações Flutuante - Sem a caixa branca padrão */}
                         <div className="relative -translate-x-1/2 -translate-y-[calc(100%+50px)] animate-in fade-in zoom-in duration-200">
                             <div className="bg-[#001622] text-white p-4 rounded-xl shadow-2xl border border-gray-800 min-w-[200px] relative">
-                                {/* Botão de Fechar */}
                                 <button
                                     onClick={() => setSelectedVehicle(null)}
                                     className="absolute top-2 right-2 text-cyan-400 hover:text-cyan-300 transition-colors"
@@ -133,7 +123,6 @@ export function VehicleMap({ locations }: VehicleMapProps) {
                                     </p>
                                 </div>
 
-                                {/* Bico do Balão */}
                                 <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[8px] border-t-[#001622]"></div>
                             </div>
                         </div>
