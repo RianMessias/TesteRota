@@ -24,7 +24,7 @@ export function VehiclesPage() {
         <div className="space-y-6">
             {/* Controles do Topo (Lista e Filtros) */}
             <div className="list-controls-container">
-                <div className="flex items-center gap-8 w-full md:w-auto mb-4 md:mb-0">
+                <div className="flex items-center gap-32 w-full md:w-auto mb-4 md:mb-0">
                     <h2 className="text-white font-bold text-lg">Lista</h2>
 
                     {/* Alternância estilo Rádio */}
@@ -74,7 +74,7 @@ export function VehiclesPage() {
                         onClick={() => setIsModalOpen(true)}
                         className="btn-novo"
                     >
-                        NOVO
+                        Novo
                     </button>
                 </div>
             </div>
@@ -99,24 +99,7 @@ export function VehiclesPage() {
                 />
             </div>
 
-            {/* Controles de Paginação (Simples) */}
-            <div className="flex justify-end gap-2 text-sm pr-6 pb-6">
-                <button
-                    disabled={page === 1}
-                    onClick={() => setPage(p => Math.max(1, p - 1))}
-                    className="px-3 py-1 bg-gray-800 text-gray-300 rounded disabled:opacity-50 hover:bg-gray-700"
-                >
-                    Anterior
-                </button>
-                <span className="px-3 py-1 text-gray-400">Página {page}</span>
-                <button
-                    disabled={!vehiclesData?.data || vehiclesData.data.length < 10} // Heurística aproximada
-                    onClick={() => setPage(p => p + 1)}
-                    className="px-3 py-1 bg-gray-800 text-gray-300 rounded disabled:opacity-50 hover:bg-gray-700"
-                >
-                    Próxima
-                </button>
-            </div>
+
         </div>
     );
 }

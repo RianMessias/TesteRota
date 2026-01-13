@@ -24,9 +24,9 @@
 
   /* Barra Lateral (Sidebar) */
   .sidebar-container {
-    @apply fixed left-0 top-0 h-full bg-[#001E2E] flex flex-col z-30 transition-all duration-300;
+    @apply sticky top-0 h-screen bg-[#001E2E] flex flex-col z-30 transition-all duration-300 flex-shrink-0;
     width: 260px;
-    border-right: 1px solid #1E2D3D;
+    /* border-right removido conforme solicitação */
   }
 
   /* Cabeçalho (Header) */
@@ -34,17 +34,16 @@
     @apply sticky top-0 z-20 flex items-center justify-between bg-[#001E2E] w-full transition-all duration-300;
     height: 70px;
     padding: 16px 26px;
-    margin-left: 260px;
-    /* Compensar a sidebar fixa */
-    width: calc(100% - 260px);
-    /* Largura fluida */
+    /* Margin e width removidos pois o pai (.main-content) já trata o posicionamento */
   }
 
   /* Responsividade para Mobile */
   @media (max-width: 768px) {
     .sidebar-container {
+      position: fixed;
+      /* Volta a ser fixed no mobile */
       transform: translateX(-100%);
-      /* Esconder sidebar no mobile */
+      height: 100vh;
     }
 
     .sidebar-container.open {
@@ -64,7 +63,7 @@
   /* Área de Conteúdo Principal */
   .main-content {
     @apply flex-1 flex flex-col relative transition-all duration-300;
-    margin-left: 260px;
+    /* margin-left removido */
   }
 
   /* Controles da Lista (Filtros e Busca) */
@@ -72,8 +71,8 @@
     @apply flex flex-col xl:flex-row justify-between items-center w-full bg-[#001E2E] xl:bg-transparent gap-4;
     min-height: 80px;
     padding: 16px 24px;
-    border-bottom: 1px dashed #1E2D3D;
-    /* Borda tracejada específica */
+    border-bottom: 1px solid #1E2D3D;
+    /* Alterado de dashed para solid */
   }
 
   /* Responsividade adicional para telas médias */
@@ -85,7 +84,8 @@
 
   /* Botão Novo */
   .btn-novo {
-    @apply bg-[#0ea5e9] hover:bg-sky-600 text-white font-bold text-sm uppercase flex items-center justify-center transition-colors;
+    @apply bg-[#0ea5e9] hover:bg-sky-600 text-white font-bold text-sm flex items-center justify-center transition-colors;
+    /* uppercase removido */
     width: 149px;
     height: 40px;
     border-radius: 8px;
