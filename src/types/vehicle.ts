@@ -16,6 +16,7 @@ export interface VehicleLocation {
     speed?: number;
     updatedAt?: string;
     createdAt?: string;
+    fleet?: string;
 }
 
 // Internal app usage (mapped from API)

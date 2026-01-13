@@ -7,6 +7,11 @@
 @layer base {
   body {
     @apply bg-[#000F17] text-white antialiased;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: -0.02em;
     /* Fundo geral da aplicação */
   }
 }

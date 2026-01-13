@@ -126,10 +126,10 @@ export function Sidebar() {
                             key={item.href}
                             to={item.href}
                             className={cn(
-                                "flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-md transition-colors",
+                                "flex items-center gap-3 px-4 py-3 rounded-md transition-colors",
                                 isActive
                                     ? "bg-accent text-white"
-                                    : "text-gray-400 hover:bg-gray-800 hover:text-white"
+                                    : "text-white hover:bg-gray-800 hover:text-white"
                             )}
                         >
                             <item.icon size={20} />
