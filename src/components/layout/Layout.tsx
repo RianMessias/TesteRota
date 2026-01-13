@@ -9,7 +9,10 @@ interface LayoutProps {
 export function Layout({ children }: LayoutProps) {
     return (
         <div className="layout-container">
+            {/* Barra lateral fixa */}
             <Sidebar />
+
+            {/* Área principal de conteúdo */}
             <div className="main-content">
                 <Header />
                 <main className="flex-1 overflow-auto p-0 relative">

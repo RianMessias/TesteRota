@@ -26,7 +26,19 @@
   .sidebar-container {
     @apply sticky top-0 h-screen bg-[#001E2E] flex flex-col z-30 transition-all duration-300 flex-shrink-0;
     width: 260px;
-    /* border-right removido conforme solicitação */
+  }
+
+  .sidebar-logo {
+    width: 122px;
+    height: 25.15px;
+    background-image: url('./assets/logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    margin: 0 auto;
   }
 
   /* Cabeçalho (Header) */
@@ -99,26 +111,56 @@
     border: 1px solid #002D44;
     border-radius: 20px;
     height: 589px;
-    /* Altura fixa ou min-height */
-    width: auto;
-    /* Largura automática para responsividade */
+    max-width: 1108px;
+    width: 100%;
   }
 
   /* Container da Tabela */
   .table-card {
-    @apply mt-6 mx-6 overflow-hidden bg-[#001622];
+    @apply mt-6 mx-6 overflow-hidden bg-[#001622] flex flex-col;
     border: 1px solid #002D44;
-    border-radius: 8px 8px 0 0;
+    border-radius: 20px;
+    max-width: 1108px;
+    height: 589px;
+    width: 100%;
   }
 
   .table-header-row {
     height: 55px;
     border-bottom: 1px solid #002D44;
+    flex-shrink: 0;
   }
 
   .table-header-cell {
-    @apply px-6 text-xs font-bold text-white uppercase tracking-wider text-center;
+    @apply px-6 text-sm font-bold text-white tracking-wider text-center;
     border-right: 1px solid #002D44;
+  }
+
+  .table-header-cell:last-child {
+    border-right: none;
+  }
+
+  .table-data-cell {
+    @apply px-6 py-4 text-sm text-center border-r border-[#002D44];
+  }
+
+  .table-data-cell:last-child {
+    border-right: none;
+  }
+
+  .table-row {
+    @apply border-b border-[#002D44] hover:bg-gray-800/30 transition-colors;
+    height: 55px;
+  }
+
+  .table-row:last-child {
+    border-bottom: none;
+  }
+
+  /* Controle de Paginação na Tabela */
+  .pagination-container {
+    @apply flex items-center justify-between px-6 py-4 border-t border-[#002D44] mt-auto;
+    flex-shrink: 0;
   }
 }
 

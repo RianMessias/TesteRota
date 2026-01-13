@@ -20,6 +20,7 @@ export function VehicleTable({
         return <div className="p-8 text-center text-gray-400">Carregando veículos...</div>;
     }
 
+    // Função para renderizar os números das páginas com lógica de reticências
     const renderPageNumbers = () => {
         const pages = [];
         for (let i = 1; i <= totalPages; i++) {
@@ -51,18 +52,19 @@ export function VehicleTable({
 
     return (
         <div className="table-card">
-            <div className="overflow-x-auto">
-                <table className="w-full text-left border-collapse">
-                    <thead>
+            {/* Área de rolagem para os dados da tabela */}
+            <div className="flex-1 overflow-auto">
+                <table className="w-full border-collapse">
+                    <thead className="sticky top-0 bg-[#001622] z-10">
                         <tr className="table-header-row">
                             <th className="table-header-cell">Placa</th>
                             <th className="table-header-cell">Frota</th>
                             <th className="table-header-cell">Tipo</th>
                             <th className="table-header-cell">Modelo</th>
-                            <th className="px-6 text-xs font-bold text-white uppercase tracking-wider text-center">Status</th>
+                            <th className="table-header-cell">Status</th>
                         </tr>
                     </thead>
-                    <tbody className="divide-y divide-border">
+                    <tbody>
                         {(!data || data.length === 0) ? (
                             <tr>
                                 <td colSpan={5} className="px-6 py-8 text-center text-gray-400">
@@ -70,20 +72,13 @@ export function VehicleTable({
                                 </td>
                             </tr>
                         ) : data.map((vehicle) => (
-                            <tr key={vehicle.id} className="hover:bg-gray-800/50 transition-colors">
-                                <td className="px-6 py-4 text-sm text-gray-300">{vehicle.plate}</td>
-                                <td className="px-6 py-4 text-sm text-gray-400">{vehicle.fleet || "-"}</td>
-                                <td className="px-6 py-4 text-sm text-gray-400 capitalize">{vehicle.type}</td>
-                                <td className="px-6 py-4 text-sm text-gray-400">{vehicle.model}</td>
-                                <td className="px-6 py-4 text-center">
-                                    <span
-                                        className={cn(
-                                            "px-3 py-1 text-xs font-medium rounded-full",
-                                            getStatusColor(vehicle.status)
-                                        )}
-                                    >
-                                        {formatStatus(vehicle.status)}
-                                    </span>
+                            <tr key={vehicle.id} className="table-row">
+                                <td className="table-data-cell text-gray-200">{vehicle.plate}</td>
+                                <td className="table-data-cell text-gray-400 font-mono">{vehicle.fleet || "000000"}</td>
+                                <td className="table-data-cell text-gray-400 capitalize">{vehicle.type}</td>
+                                <td className="table-data-cell text-gray-400">{vehicle.model}</td>
+                                <td className="table-data-cell text-gray-400">
+                                    {formatStatus(vehicle.status)}
                                 </td>
                             </tr>
                         ))}
@@ -91,9 +86,9 @@ export function VehicleTable({
                 </table>
             </div>
 
-            {/* Pagination Controls */}
+            {/* Controles de Paginação - Sempre visíveis no final do card */}
             {totalPages > 0 && (
-                <div className="flex items-center justify-between px-6 py-4 border-t border-border mt-2">
+                <div className="pagination-container">
                     <button
                         onClick={() => onPageChange(currentPage - 1)}
                         disabled={currentPage === 1}
@@ -119,16 +114,11 @@ export function VehicleTable({
     );
 }
 
-function getStatusColor(status: string) {
-    const s = status.toLowerCase();
-    if (s.includes("viagem") || s === 'active') return "bg-green-500/10 text-green-500 border border-green-500/20";
-    if (s.includes("manutenção") || s === 'maintenance') return "bg-red-500/10 text-red-500 border border-red-500/20";
-    if (s.includes("disponível") || s === 'available') return "bg-gray-500/10 text-gray-400 border border-gray-500/20";
-    return "bg-blue-500/10 text-blue-500 border border-blue-500/20";
-}
-
+// Formata o status para o padrão brasileiro
 function formatStatus(status: string) {
-    if (status === 'active') return 'Em viagem';
-    if (status === 'maintenance') return 'Em manutenção';
+    const s = status.toLowerCase();
+    if (s === 'active' || s.includes("viagem")) return 'Em viagem';
+    if (s === 'maintenance' || s.includes("manutenção")) return 'Em manutenção';
+    if (s === 'available' || s.includes("disponível")) return 'Disponível';
     return status;
 }

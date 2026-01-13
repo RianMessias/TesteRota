@@ -1,5 +1,4 @@
 import { useState } from "react";
-// import { Plus } from "lucide-react"; // Removed as it is not used in the new design
 import { useVehicles, useVehicleLocations } from "../hooks/useVehicles";
 import { VehicleTable } from "../components/vehicles/VehicleTable";
 import { VehicleMap } from "../components/vehicles/VehicleMap";
@@ -11,6 +10,7 @@ export function VehiclesPage() {
     const [page, setPage] = useState(1);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
+    // Busca os dados dos veículos paginados de acordo com o filtro e busca
     const { data: vehiclesData, isLoading: isLoadingVehicles } = useVehicles({
         page,
         perPage: 10,
@@ -18,6 +18,7 @@ export function VehiclesPage() {
         filter: search || undefined
     });
 
+    // Busca todas as localizações dos veículos para o mapa
     const { data: locationsData } = useVehicleLocations();
 
     return (
@@ -27,7 +28,7 @@ export function VehiclesPage() {
                 <div className="flex items-center gap-32 w-full md:w-auto mb-4 md:mb-0">
                     <h2 className="text-white font-bold text-lg">Lista</h2>
 
-                    {/* Alternância estilo Rádio */}
+                    {/* Alternância estilo Rádio para filtros */}
                     <div className="flex items-center gap-6">
                         <label className="flex items-center gap-2 cursor-pointer group">
                             <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors ${filterType === 'tracked' ? 'border-accent' : 'border-gray-500 group-hover:border-gray-400'}`}>
@@ -88,9 +89,10 @@ export function VehiclesPage() {
                 </div>
             </div>
 
+            {/* Modal de Criação de Veículo */}
             <CreateVehicleModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
 
-            {/* Seção do Mapa */}
+            {/* Seção do Mapa Rastreador */}
             {filterType === "tracked" && (
                 <div className="map-card p-6 flex flex-col">
                     <h3 className="text-white font-bold pl-1 mb-4">Mapa rastreador</h3>
@@ -100,7 +102,7 @@ export function VehiclesPage() {
                 </div>
             )}
 
-            {/* Seção da Tabela */}
+            {/* Seção da Tabela de Veículos */}
             <div className="w-full pb-6">
                 <VehicleTable
                     data={vehiclesData?.data || []}
@@ -110,8 +112,6 @@ export function VehiclesPage() {
                     onPageChange={(newPage) => setPage(newPage)}
                 />
             </div>
-
-
         </div>
     );
 }

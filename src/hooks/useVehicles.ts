@@ -10,6 +10,9 @@ interface UseVehiclesParams {
     typeVehicle?: string;
 }
 
+/**
+ * Hook para buscar veículos com paginação
+ */
 export function useVehicles(params: UseVehiclesParams) {
     return useQuery({
         queryKey: ["vehicles", params],
@@ -18,7 +21,7 @@ export function useVehicles(params: UseVehiclesParams) {
                 params,
             });
 
-            // Map to internal structure
+            // Mapeia para a estrutura interna da aplicação
             return {
                 data: data.content.vehicles,
                 meta: {
@@ -33,17 +36,16 @@ export function useVehicles(params: UseVehiclesParams) {
     });
 }
 
+/**
+ * Hook para buscar as localizações de todos os veículos (tempo real)
+ */
 export function useVehicleLocations() {
     return useQuery({
         queryKey: ["vehicleLocations"],
         queryFn: async () => {
-            // The API likely returns { content: { items: [...] } } or { content: [...] }
-            // Based on logs, it seems to be content.items or content itself?
-            // Subagent showed content.items for paginated. For list-all?
-            // Assuming list-all returns content as array directly (common pattern) or content.items. 
-            // We'll check safely.
             const { data } = await api.get<ApiResponse<any>>("/recruitment/vehicles/list-all-vehicle-locations");
 
+            // Trata as diferentes possibilidades de retorno da API
             if (Array.isArray(data.content)) {
                 return data.content as VehicleLocation[];
             } else if (Array.isArray(data.content?.items)) {
@@ -51,10 +53,13 @@ export function useVehicleLocations() {
             }
             return [] as VehicleLocation[];
         },
-        refetchInterval: 30000, // Refresh every 30s
+        refetchInterval: 30000, // Atualiza a cada 30 segundos
     });
 }
 
+/**
+ * Hook para busca infinita de veículos (carregar mais)
+ */
 export function useInfiniteVehicles(params: Omit<UseVehiclesParams, 'page'>) {
     return useInfiniteQuery({
         queryKey: ["vehicles", "infinite", params],

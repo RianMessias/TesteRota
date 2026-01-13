@@ -3,6 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { X } from "lucide-react";
 
+// Esquema de validação para o formulário de veículo
 const vehicleSchema = z.object({
     plate: z.string().min(7, "A placa deve ter pelo menos 7 caracteres").max(8, "Placa inválida"),
     fleetNumber: z.string().min(1, "O número da frota é obrigatório"),
@@ -30,7 +31,8 @@ export function CreateVehicleModal({ isOpen, onClose }: CreateVehicleModalProps)
     });
 
     const onSubmit = (data: VehicleFormData) => {
-        console.log("Creating vehicle:", data);
+        // Log para depuração e feedback de sucesso (simulado)
+        console.log("Criando veículo:", data);
         alert("Veículo criado com sucesso! (Simulação)");
         reset();
         onClose();
