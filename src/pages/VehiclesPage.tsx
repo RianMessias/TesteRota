@@ -5,30 +5,35 @@ import { VehicleMap } from "../components/vehicles/VehicleMap";
 import { CreateVehicleModal } from "../components/vehicles/CreateVehicleModal";
 
 export function VehiclesPage() {
+    // Esse estado guarda se estamos vendo "Rastreados" ou "Outros"
     const [filterType, setFilterType] = useState<"tracked" | "other">("tracked");
+
+    // Esse estado guarda o texto que o usuário digita na barra de busca
     const [search, setSearch] = useState("");
+
+    // Esse estado controla qual página da lista estamos vendo no momento
     const [page, setPage] = useState(1);
+
+    // Esse estado controla se a janelinha (modal) de cadastro está aberta
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    // Busca os dados dos veículos paginados de acordo com o filtro e busca
+    // Aqui usamos o hook para buscar os veículos de acordo com os filtros
     const { data: vehiclesData, isLoading: isLoadingVehicles } = useVehicles({
-        page,
-        perPage: 10,
+        page: page, // informamos a página atual
+        perPage: 10, // limite de 10 por página
         type: filterType === "tracked" ? "tracked" : "notTracked",
         filter: search || undefined
     });
 
-    // Busca todas as localizações dos veículos para o mapa
+    // Aqui buscamos as localizações para mostrar os pontos no mapa
     const { data: locationsData } = useVehicleLocations();
 
     return (
         <div className="space-y-6">
-            {/* Controles do Topo (Lista e Filtros) */}
             <div className="list-controls-container">
                 <div className="flex items-center gap-32 w-full md:w-auto mb-4 md:mb-0">
                     <h2 className="text-white font-bold text-lg">Lista</h2>
 
-                    {/* Alternância estilo Rádio para filtros */}
                     <div className="flex items-center gap-6">
                         <label className="flex items-center gap-2 cursor-pointer group">
                             <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors ${filterType === 'tracked' ? 'border-accent' : 'border-gray-500 group-hover:border-gray-400'}`}>
@@ -81,7 +86,10 @@ export function VehiclesPage() {
                     </div>
 
                     <button
-                        onClick={() => setIsModalOpen(true)}
+                        onClick={() => {
+                            console.log("Abrindo o modal de novo veículo...");
+                            setIsModalOpen(true);
+                        }}
                         className="btn-novo"
                     >
                         Novo
@@ -89,10 +97,8 @@ export function VehiclesPage() {
                 </div>
             </div>
 
-            {/* Modal de Criação de Veículo */}
             <CreateVehicleModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
 
-            {/* Seção do Mapa Rastreador */}
             {filterType === "tracked" && (
                 <div className="map-card p-6 flex flex-col">
                     <h3 className="text-white font-bold pl-1 mb-4">Mapa rastreador</h3>
@@ -102,14 +108,13 @@ export function VehiclesPage() {
                 </div>
             )}
 
-            {/* Seção da Tabela de Veículos */}
             <div className="w-full pb-6">
                 <VehicleTable
                     data={vehiclesData?.data || []}
                     isLoading={isLoadingVehicles}
                     currentPage={page}
                     totalPages={vehiclesData?.meta.lastPage || 0}
-                    onPageChange={(newPage) => setPage(newPage)}
+                    onPageChange={setPage}
                 />
             </div>
         </div>

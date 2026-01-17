@@ -8,17 +8,20 @@ interface VehicleTableProps {
     onPageChange: (page: number) => void;
 }
 
+// Esse componente mostra a tabela de veículos e a paginação lá em baixo
 export function VehicleTable({
-    data,
-    isLoading,
-    currentPage,
-    totalPages,
-    onPageChange
+    data, // os veículos que recebemos
+    isLoading, // se está carregando ou não
+    currentPage, // qual página estamos
+    totalPages, // total de páginas que existem
+    onPageChange // função para trocar de página
 }: VehicleTableProps) {
+    // Se estiver carregando, mostra um aviso na tela
     if (isLoading) {
         return <div className="p-8 text-center text-gray-400">Carregando veículos...</div>;
     }
 
+    // Essa função ajuda a criar os números da paginação (1, 2, 3...)
     const renderPageNumbers = () => {
         const pages = [];
         for (let i = 1; i <= totalPages; i++) {
@@ -37,7 +40,10 @@ export function VehicleTable({
                 pages.push(
                     <button
                         key={i}
-                        onClick={() => onPageChange(i)}
+                        onClick={() => {
+                            console.log("Usuário clicou na página:", i);
+                            onPageChange(i);
+                        }}
                         className={classes}
                     >
                         {i}
@@ -50,6 +56,7 @@ export function VehicleTable({
         return pages;
     };
 
+    // Função para traduzir o status que vem da API para Português
     function formatStatus(status: string) {
         const s = status.toLowerCase();
         if (s === 'active' || s.includes("viagem")) return 'Em viagem';

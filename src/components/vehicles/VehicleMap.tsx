@@ -35,14 +35,18 @@ interface VehicleMapProps {
 }
 
 export function VehicleMap({ locations }: VehicleMapProps) {
+    // Estado que guarda qual veículo foi clicado pelo usuário
     const [selectedVehicle, setSelectedVehicle] = useState<VehicleLocation | null>(null);
 
+    // Hook que carrega a API do Google Maps com a chave que está no .env
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
         googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY || ""
     });
 
+    // Essa função faz o mapa se ajustar para mostrar todos os marcadores na tela
     const onLoad = useCallback(function callback(map: google.maps.Map) {
+        console.log("Ajustando zoom do mapa...");
         const bounds = new window.google.maps.LatLngBounds();
         if (locations.length > 0) {
             let hasValidBounds = false;
@@ -77,7 +81,10 @@ export function VehicleMap({ locations }: VehicleMapProps) {
                         <Marker
                             key={loc.id}
                             position={{ lat: loc.lat, lng: loc.lng }}
-                            onClick={() => setSelectedVehicle(loc)}
+                            onClick={() => {
+                                console.log("Usuário clicou no veículo:", loc.plate);
+                                setSelectedVehicle(loc);
+                            }}
                             icon={{
                                 url: `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(`
                                     <svg width="40" height="50" viewBox="0 0 40 50" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -101,7 +108,10 @@ export function VehicleMap({ locations }: VehicleMapProps) {
                         <div className="relative -translate-x-1/2 -translate-y-[calc(100%+50px)] animate-in fade-in zoom-in duration-200">
                             <div className="bg-[#001622] text-white p-4 rounded-xl shadow-2xl border border-gray-800 min-w-[200px] relative">
                                 <button
-                                    onClick={() => setSelectedVehicle(null)}
+                                    onClick={() => {
+                                        console.log("Fechando detalhes do veículo");
+                                        setSelectedVehicle(null);
+                                    }}
                                     className="absolute top-2 right-2 text-cyan-400 hover:text-cyan-300 transition-colors"
                                 >
                                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2">

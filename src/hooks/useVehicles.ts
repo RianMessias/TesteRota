@@ -10,25 +10,26 @@ interface UseVehiclesParams {
     typeVehicle?: string;
 }
 
-/**
- * Hook para buscar veículos com paginação
- */
 export function useVehicles(params: UseVehiclesParams) {
     return useQuery({
         queryKey: ["vehicles", params],
         queryFn: async () => {
-            const { data } = await api.get<ApiResponse<ApiPaginatedContent<Vehicle>>>("/recruitment/vehicles/list-with-paginate", {
-                params,
+            console.log("Buscando dados na API...");
+            const response = await api.get<ApiResponse<ApiPaginatedContent<Vehicle>>>("/recruitment/vehicles/list-with-paginate", {
+                params: params,
             });
 
-            // Mapeia para a estrutura interna da aplicação
+            const dadosDaApi = response.data;
+            console.log("Dados recebidos com sucesso!");
+
+            // Retornamos os dados formatados para o que o componente precisa
             return {
-                data: data.content.vehicles,
+                data: dadosDaApi.content.vehicles,
                 meta: {
-                    total: data.content.total || (data.content.totalPages * (Number(data.content.perPage) || 10)),
-                    page: data.content.page,
-                    lastPage: data.content.totalPages,
-                    perPage: Number(data.content.perPage) || 10
+                    total: dadosDaApi.content.total || (dadosDaApi.content.totalPages * (Number(dadosDaApi.content.perPage) || 10)),
+                    page: dadosDaApi.content.page,
+                    lastPage: dadosDaApi.content.totalPages,
+                    perPage: Number(dadosDaApi.content.perPage) || 10
                 }
             } as PaginatedResponse<Vehicle>;
         },
@@ -36,20 +37,19 @@ export function useVehicles(params: UseVehiclesParams) {
     });
 }
 
-/**
- * Hook para buscar as localizações de todos os veículos (tempo real)
- */
 export function useVehicleLocations() {
     return useQuery({
         queryKey: ["vehicleLocations"],
         queryFn: async () => {
-            const { data } = await api.get<ApiResponse<any>>("/recruitment/vehicles/list-all-vehicle-locations");
+            console.log("Buscando localizações para o mapa...");
+            const response = await api.get<ApiResponse<any>>("/recruitment/vehicles/list-all-vehicle-locations");
+            const dados = response.data;
 
-            // Trata as diferentes possibilidades de retorno da API
-            if (Array.isArray(data.content)) {
-                return data.content as VehicleLocation[];
-            } else if (Array.isArray(data.content?.items)) {
-                return data.content.items as VehicleLocation[];
+            // Verificamos onde os itens estão na resposta da API
+            if (Array.isArray(dados.content)) {
+                return dados.content as VehicleLocation[];
+            } else if (Array.isArray(dados.content?.items)) {
+                return dados.content.items as VehicleLocation[];
             }
             return [] as VehicleLocation[];
         },
@@ -57,9 +57,6 @@ export function useVehicleLocations() {
     });
 }
 
-/**
- * Hook para busca infinita de veículos (carregar mais)
- */
 export function useInfiniteVehicles(params: Omit<UseVehiclesParams, 'page'>) {
     return useInfiniteQuery({
         queryKey: ["vehicles", "infinite", params],

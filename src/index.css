@@ -12,22 +12,16 @@
     font-size: 14px;
     line-height: 100%;
     letter-spacing: -0.02em;
-    /* Fundo geral da aplicação */
   }
 }
 
 @layer components {
-
-  /* Container Principal do Layout */
   .layout-container {
     @apply flex min-h-screen w-full relative overflow-hidden;
     max-width: 1440px;
-    /* Largura máxima para telas grandes */
     margin: 0 auto;
-    /* Centralizar em telas muito largas */
   }
 
-  /* Barra Lateral (Sidebar) */
   .sidebar-container {
     @apply sticky top-0 h-screen bg-[#001E2E] flex flex-col z-30 transition-all duration-300 flex-shrink-0;
     width: 260px;
@@ -46,19 +40,15 @@
     margin: 0 auto;
   }
 
-  /* Cabeçalho (Header) */
   .header-container {
     @apply sticky top-0 z-20 flex items-center justify-between bg-[#001E2E] w-full transition-all duration-300;
     height: 70px;
     padding: 16px 26px;
-    /* Margin e width removidos pois o pai (.main-content) já trata o posicionamento */
   }
 
-  /* Responsividade para Mobile */
   @media (max-width: 768px) {
     .sidebar-container {
       position: fixed;
-      /* Volta a ser fixed no mobile */
       transform: translateX(-100%);
       height: 100vh;
     }
@@ -77,32 +67,25 @@
     }
   }
 
-  /* Área de Conteúdo Principal */
   .main-content {
     @apply flex-1 flex flex-col relative transition-all duration-300;
-    /* margin-left removido */
   }
 
-  /* Controles da Lista (Filtros e Busca) */
   .list-controls-container {
     @apply flex flex-col xl:flex-row justify-between items-center w-full bg-[#001E2E] xl:bg-transparent gap-4;
     min-height: 80px;
     padding: 16px 24px;
     border-bottom: 1px solid #1E2D3D;
-    /* Alterado de dashed para solid */
   }
 
-  /* Responsividade adicional para telas médias */
   @media (min-width: 1024px) {
     .list-controls-container {
       padding: 16px 36px;
     }
   }
 
-  /* Botão Novo */
   .btn-novo {
     @apply bg-[#0ea5e9] hover:bg-sky-600 text-white font-bold text-sm flex items-center justify-center transition-colors;
-    /* uppercase removido */
     width: 149px;
     height: 40px;
     border-radius: 8px;
@@ -110,7 +93,6 @@
     padding: 10px;
   }
 
-  /* Card do Mapa */
   .map-card {
     @apply relative overflow-hidden bg-[#001622] mt-5 mx-6;
     border: 1px solid #002D44;
@@ -120,7 +102,6 @@
     width: 100%;
   }
 
-  /* Container da Tabela */
   .table-card {
     @apply mt-6 mx-6 overflow-hidden bg-[#001622] flex flex-col;
     border: 1px solid #002D44;
@@ -162,14 +143,12 @@
     border-bottom: none;
   }
 
-  /* Controle de Paginação na Tabela */
   .pagination-container {
     @apply flex items-center justify-between px-6 py-4 border-t border-[#002D44] mt-auto;
     flex-shrink: 0;
   }
 }
 
-/* Customização da barra de rolagem para tema escuro */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
