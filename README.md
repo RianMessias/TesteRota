@@ -1,73 +1,32 @@
-# React + TypeScript + Vite
+# Teste Rota - Meu Sistema de Veículos 🚛
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+E aí, tudo certo? Esse aqui é o projeto que eu desenvolvi para o teste de desenvolvedor. Tentei caprichar o máximo que consegui no tempo que tive, focando em deixar o código limpo e a interface bonitinha para quem for usar. Usei React com TypeScript e Tailwind pra estilização.
 
-Currently, two official plugins are available:
+## ✅ O que eu consegui fazer (Funcionalidades)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Tabela de Veículos:** Montei a listagem puxando os dados da API. Dá pra ver a placa, o número da frota e o modelo dos caminhões.
+- **Filtros por Categoria:** Coloquei as opções de "Rastreados" e "Outros" ali em cima. Quando você clica, a lista atualiza sozinha.
+- **Mapa com Google Maps:** Consegui integrar o mapa! Ele mostra os ícones onde os veículos estão. Se você clicar num ícone, abre um balãozinho com as informações dele.
+- **Barra de Pesquisa:** Se digitar uma placa ou o número da frota, a lista já filtra na hora. Isso ajuda muito na hora de achar um veículo específico.
+- **Paginação:** Como pode ter muito dado, fiz aquele esquema de passar as páginas de 10 em 10.
+- **Cadastro (Modal):** Fiz uma janelinha que abre para cadastrar novos veículos, com validação nos campos (pra não deixar salvar nada vazio ou placa errada).
 
-## React Compiler
+## 🤯 Onde eu tive mais dificuldade
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Integração com o Mapas:** Confesso que apanhei um pouco para fazer os marcadores aparecerem no lugar certo e ajustar o zoom automático sempre que a lista mudava. O Google Maps tem muitos detalhes na documentação e demorei um pouquinho pra pegar o jeito.
+- **TypeScript:** Como estou tentando usar tudo tipado direitinho, tive alguns erros chatos na hora de passar as informações da API para os componentes, mas no fim deu certo!
+- **Ambiente (.env):** No começo esqueci de configurar a variável de ambiente e nada funcionava, fiquei um tempão achando que era erro no código até perceber que era só o Token que faltava.
 
-## Expanding the ESLint configuration
+## ⚠️ O que ainda falta (Pontos de melhoria)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Persistência no Cadastro:** O botão de "Salvar" no formulário de Novo Veículo ainda é "fake". Ele mostra o aviso de sucesso e limpa os campos, mas como ainda não tenho a rota de `POST` configurada, o dado não fica gravado no banco de verdade.
+- **Responsividade no Mapa:** Em telas de celular muito pequenas, o mapa fica meio apertado. Eu queria ter tido mais tempo pra ajustar melhor o CSS pra mobile.
+- **Movimentação ao vivo:** Por enquanto, os veículos só mudam de lugar se você atualizar a página. Seria legal fazer eles se mexerem em tempo real no futuro.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🛠️ Como rodar aí na sua máquina
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+1. Abre o terminal na pasta e instala as coisas: `npm install`
+2. Cria o arquivo `.env` com a sua chave do Maps e o link da API.
+3. Roda o comando: `npm run dev`
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Espero que o projeto mostre um pouco do que eu já sei e da minha vontade de aprender mais! Valeu pela oportunidade! :)
